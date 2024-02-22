@@ -20,4 +20,3 @@ jobs:
       - name: Test Skip
         if: ${{ secrets.NOT_EXISTS != "" }}
         run: echo "not skiped"
-        
