@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Print Result
-        run: echo "${{ secrets.NOT_EXISTS != "" }}"
+        run: echo "${{ secrets.NOT_EXISTS != '' }}"
       - name: Test Skip
-        if: ${{ secrets.NOT_EXISTS != "" }}
+        if: ${{ secrets.NOT_EXISTS != '' }}
         run: echo "not skiped"
