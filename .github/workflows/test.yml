@@ -1,0 +1,23 @@
+name: Test
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '*.md'
+permissions:
+  contents: write
+jobs:
+  build:
+    permissions:
+      contents: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Print Result
+        run: echo "${{ secrets.NOT_EXISTS != "" }}"
+      - name: Test Skip
+        if: ${{ secrets.NOT_EXISTS != "" }}
+        run: echo "not skiped"
+        
