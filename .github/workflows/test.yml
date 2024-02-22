@@ -15,12 +15,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Get short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
       - name: Check Secrets
         run: echo "SECRETS_LENGTH=$(expr length "$SECRETS_TO_CHECK")" >> $GITHUB_ENV
         env:
           SECRETS_TO_CHECK: ${{ secrets.NOT_EXISTS }}
       - name: Print Value
-        run: echo $SECRETS_LENGTH
+        run: echo "$SECRETS_LENGTH, $SHORT_SHA"
       - name: Test Skip
         if: ${{ env.SECRETS_LENGTH > 0 }}
         run: echo "not skiped"
