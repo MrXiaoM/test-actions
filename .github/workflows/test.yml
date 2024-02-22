@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Check Secrets
-        run: length=${expr length "$SECRETS_TO_CHECK"} && echo "SECRETS_LENGTH=$length" >> $GITHUB_ENV
+        run: length=$(expr length "$SECRETS_TO_CHECK") && echo "SECRETS_LENGTH=$length" >> $GITHUB_ENV
         env:
           SECRETS_TO_CHECK: ${{ secrets.NOT_EXISTS }}
       - name: Print Value
