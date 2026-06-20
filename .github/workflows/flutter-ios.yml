@@ -37,6 +37,10 @@ jobs:
           cd frontend
           flutter pub get
 
+      - name: Install CocoaPods dependencies
+        run: pod install
+        working-directory: ./frontend/ios
+
       # - name: Run build_runner
       #   run: |
       #     cd frontend
