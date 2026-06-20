@@ -20,11 +20,17 @@ jobs:
           repository: ${{ inputs.target_repository }}
           token: ${{ secrets.BUILT_IOS_APP_TOKEN }}
 
+      - name: List files
+        run: |
+          ls -la ./
+          ls -la ./frontend
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version-file: ./frontend/pubspec.yaml
+          flutter-version: '3.35.7'
+          sdk: '3.9.2'
           cache: true
 
       - name: Install dependencies

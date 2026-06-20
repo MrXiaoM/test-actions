@@ -1,9 +1,6 @@
 name: Test
 on:
-  push:
-    branches: [ "main" ]
-    paths-ignore:
-      - '*.md'
+  workflow_dispatch: {}
 permissions:
   contents: write
 jobs:
