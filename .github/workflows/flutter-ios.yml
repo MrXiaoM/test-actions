@@ -36,6 +36,13 @@ jobs:
         run: |
           cd frontend
           flutter pub get
+      
+      - name: Force Disable Xcode Automatic Signing
+        run: |
+          sed -i '' 's/ProvisioningStyle = Automatic;/ProvisioningStyle = Manual;/g' frontend/ios/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/DEVELOPMENT_TEAM = .*/DEVELOPMENT_TEAM = "";/g' frontend/ios/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/CODE_SIGNING_REQUIRED = YES/CODE_SIGNING_REQUIRED = NO/g' frontend/ios/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/CODE_SIGNING_ALLOWED = YES/CODE_SIGNING_ALLOWED = NO/g' frontend/ios/Runner.xcodeproj/project.pbxproj
 
       - name: Install CocoaPods dependencies
         run: pod install
