@@ -1,0 +1,52 @@
+name: Build Flutter iOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_repository:
+        description: 'Repository'
+        required: true
+        type: string
+
+jobs:
+  build-ios:
+    name: Build iOS App
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ inputs.target_repository }}
+          token: ${{ secrets.BUILT_IOS_APP_TOKEN }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: ./frontend/pubspec.yaml
+          cache: true
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          flutter pub get
+
+      # - name: Run build_runner
+      #   run: |
+      #     cd frontend
+      #     dart run build_runner build -t lib/main.dart --delete-conflicting-outputs
+
+      - name: Build iOS
+        run: |
+          cd frontend
+          flutter build ios -t lib/main.dart --release --no-codesign
+          ls -la build/ios
+          ls -la build/ios/iphoneos
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build-artifact
+          path: frontend/build/ios/iphoneos/*
+          retention-days: 3
