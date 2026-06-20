@@ -30,7 +30,6 @@ jobs:
         with:
           channel: stable
           flutter-version: '3.35.7'
-          sdk: '3.9.2'
           cache: true
 
       - name: Install dependencies
