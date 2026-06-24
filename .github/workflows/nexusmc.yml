@@ -27,7 +27,7 @@ jobs:
                 "gameVersions": ["26.1", "26.1.1", "26.1.2"]
               },
               {
-                "path": "LICENSE",
+                "path": "README.md",
                 "loaderIds": ["fabric"],
                 "gameVersions": ["26.1", "26.1.1", "26.1.2"]
               }
